@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pazzwork — Executive Assistant for CEOs & Founders</title>
+  <meta name="description" content="Pazzwork: Human-led Executive Assistant services for CEOs & founders. Inbox & calendar management, ad‑hoc tasks, travel booking, podcast support, and more." />
+  <style>
+    :root{
+      --bg: #f8fafc;         /* soft beige / very light slate */
+      --card: #ffffff;
+      --ink: #0f172a;         /* slate-900 */
+      --muted:#475569;        /* slate-600 */
+      --line:#e2e8f0;         /* slate-200 */
+      --accent:#0f172a;       /* dark for strong CTAs */
+      --accent-2:#334155;     /* slate-700 */
+      --pill:#e2e8f0;
+      --shadow:0 10px 20px rgba(15,23,42,.06);
+      --radius:18px;
+      --radius-sm:12px;
+      --radius-lg:26px;
+      --container:1160px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--ink); background:linear-gradient(#fff, var(--bg));}
+    img{max-width:100%;display:block}
+    a{color:inherit}
+    .container{max-width:var(--container);margin:0 auto;padding:0 20px}
+    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.1rem;border-radius:14px;border:1px solid transparent;background:var(--accent);color:#fff;font-weight:700;text-decoration:none}
+    .btn:hover{opacity:.92}
+    .btn-outline{background:#fff;color:var(--ink);border-color:var(--line)}
+    .btn-outline:hover{border-color:#cbd5e1}
+    .header{position:sticky;top:0;backdrop-filter:saturate(120%) blur(6px);background:rgba(255,255,255,.7);border-bottom:1px solid var(--line);z-index:50}
+    .nav{display:flex;gap:20px;align-items:center}
+    .nav a{font-weight:600;text-decoration:none;color:var(--muted)}
+    .nav a:hover{color:var(--ink)}
+    .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none}
+    .brand-pill{width:38px;height:38px;border-radius:12px;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:800;box-shadow:var(--shadow)}
+    h1{font-size: clamp(2rem, 5vw, 3.2rem); line-height:1.12;margin:0}
+    h2{font-size: clamp(1.6rem, 3.5vw, 2.4rem); margin:0 0 .6rem}
+    h3{margin:.2rem 0 .2rem;font-size:1.1rem}
+    p{color:var(--muted);line-height:1.65}
+    .section{padding:70px 0}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+    .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .grid-6{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+    .pill{padding:.4rem .7rem;border-radius:999px;background:var(--pill);font-weight:700;font-size:.78rem;color:#1f2937;display:inline-flex;gap:.4rem;align-items:center}
+    .muted{color:var(--muted)}
+    .hero-visual{position:relative}
+    .hero-main{border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow);height:360px;object-fit:cover;width:100%}
+    .hero-me{position:absolute;bottom:-16px;left:-16px;width:140px;height:140px;border-radius:100vmax;border:5px solid #fff;box-shadow:var(--shadow);object-fit:cover}
+    .list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+    .list li{display:flex;gap:.6rem;align-items:flex-start}
+    .icon{width:18px;height:18px;flex:0 0 18px}
+    .icon svg{width:18px;height:18px;display:block}
+    .service-card h3{font-weight:800}
+    .tool{border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;font-weight:700;background:#fff}
+    .stat{display:grid;gap:6px}
+    .stat .k{color:var(--muted);font-size:.9rem}
+    .stat .v{font-weight:800;font-size:1.3rem}
+    .testi{display:grid;gap:10px}
+    .price{display:flex;flex-direction:column;gap:10px}
+    .price .amt{font-size:1.9rem;font-weight:900}
+    .price .note{font-size:.86rem;color:var(--muted)}
+    .most{position:absolute;top:-12px;left:18px;background:var(--accent);color:#fff;font-size:.72rem;padding:.3rem .6rem;border-radius:999px;box-shadow:var(--shadow)}
+    form .field{width:100%;padding:14px;border-radius:12px;border:1px solid var(--line);outline: none}
+    form .field:focus{border-color:#cbd5e1}
+    .footer{border-top:1px solid var(--line);padding:28px 0;background:#fff;color:var(--muted);font-size:.92rem}
+    @media (max-width: 940px){
+      .grid-2{grid-template-columns:1fr;gap:28px}
+      .grid-3{grid-template-columns:1fr;gap:14px}
+      .grid-6{grid-template-columns:repeat(2,1fr)}
+      .hero-me{width:110px;height:110px;bottom:-12px;left:-12px}
+      .nav{display:none}
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;">
+      <a class="brand" href="#home" aria-label="Pazzwork home">
+        <div class="brand-pill">P</div>
+        <strong>Pazzwork</strong>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#results">Results</a>
+        <a href="#services">Services</a>
+        <a href="#tools">Tools</a>
+        <a href="#skills">Skills</a>
+        <a href="#about">About</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="btn" href="#contact">Book a Call</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section id="home" class="section" style="padding-top:84px">
+    <div class="container grid-2">
+      <div>
+        <span class="pill">EA for CEOs & Founders</span>
+        <h1 style="margin-top:10px">Get your time back.<br/>Declutter your inbox.</h1>
+        <p style="margin:14px 0 0">I keep your inbox and calendar calm, run ad‑hoc tasks, and build simple systems so you can lead—without the admin noise.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px">
+          <a class="btn" href="#contact">Start with a Free Discovery Call</a>
+          <a class="btn btn-outline" href="#services">See Services</a>
+        </div>
+        <p class="muted" style="margin-top:12px;font-size:.92rem">Human‑led assistance (8+ yrs). AI assists behind the scenes—never replaces the human touch.</p>
+      </div>
+      <div class="hero-visual">
+        <!-- Calming CEO visual -->
+        <img class="hero-main" alt="Calm CEO lifestyle"
+             src="https://images.unsplash.com/photo-1529336953121-dc2d1f7ed0cb?q=80&w=1400&auto=format&fit=crop" />
+        <!-- Small circular photo of you working -->
+        <img class="hero-me" alt="Your EA working happily"
+             src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format&fit=crop" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Results -->
+  <section id="results" class="section">
+    <div class="container">
+      <h2>What your life looks like with Pazzwork</h2>
+      <p class="muted" style="max-width:720px;margin:.4rem 0 1.2rem">Imagine a week where your inbox is sorted, meetings are prepared, travel is booked, and decisions arrive as clean summaries. More focus, more calm, more momentum.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Inbox Zen</h3>
+          <p class="muted">Priority triage, smart folders, templates—no guesswork on what needs you.</p>
+        </div>
+        <div class="card">
+          <h3>Calendar Clarity</h3>
+          <p class="muted">Deep‑work blocks, travel‑aware scheduling, and pre‑reads for every call.</p>
+        </div>
+        <div class="card">
+          <h3>Frictionless Ops</h3>
+          <p class="muted">One place for tasks, SOPs, and updates so the team always knows next steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="section" style="background:#fff">
+    <div class="container">
+      <h2>Services</h2>
+      <p class="muted" style="max-width:720px;margin:.4rem 0 1.2rem">Human‑led assistance supported by smart tools. Every message, booking, and decision is handled thoughtfully by me.</p>
+      <div class="grid-3">
+        <div class="card service-card">
+          <h3>Inbox Management</h3>
+          <ul class="list">
+            <li>Daily triage & priority routing</li>
+            <li>Drafts & tone‑consistent replies</li>
+            <li>Rules, labels & light automations</li>
+          </ul>
+        </div>
+        <div class="card service-card">
+          <h3>Calendar Management</h3>
+          <ul class="list">
+            <li>Time‑zone smart scheduling</li>
+            <li>Buffer blocks & travel‑aware planning</li>
+            <li>Pre‑reads & meeting briefs</li>
+          </ul>
+        </div>
+        <div class="card service-card">
+          <h3>Ad‑hoc & Personal Tasks</h3>
+          <ul class="list">
+            <li>Flight & hotel bookings, itineraries</li>
+            <li>Ordering meals, gifts, couriers</li>
+            <li>Vendor coordination & reminders</li>
+          </ul>
+        </div>
+        <div class="card service-card">
+          <h3>Podcast & Content Support</h3>
+          <ul class="list">
+            <li>Episode planning & guest coordination</li>
+            <li>Light audio cleanup & show notes</li>
+            <li>Publishing workflow assistance</li>
+          </ul>
+        </div>
+        <div class="card service-card">
+          <h3>Basic Editing & Design</h3>
+          <ul class="list">
+            <li>Basic video trims & captions</li>
+            <li>Canva image editing & assets</li>
+            <li>Slides & one‑pagers</li>
+          </ul>
+        </div>
+        <div class="card service-card">
+          <h3>Ops & Admin</h3>
+          <ul class="list">
+            <li>SOPs, checklists & templates</li>
+            <li>CRM updates & list hygiene</li>
+            <li>Expense tracking & receipts</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools" class="section">
+    <div class="container">
+      <h2>Tools I speak fluently</h2>
+      <p class="muted" style="margin:.4rem 0 1.2rem">Microsoft 365 • Google Workspace • ClickUp • Asana • Trello • Slack • Zoom • Kajabi • GoHighLevel • Notion • Gmail Filters & Rules • Drive & SharePoint</p>
+      <div class="grid-6">
+        <div class="tool">Microsoft 365</div>
+        <div class="tool">Google Workspace</div>
+        <div class="tool">ClickUp</div>
+        <div class="tool">Asana</div>
+        <div class="tool">Trello</div>
+        <div class="tool">Slack</div>
+        <div class="tool">Zoom</div>
+        <div class="tool">Kajabi</div>
+        <div class="tool">GoHighLevel</div>
+        <div class="tool">Notion</div>
+        <div class="tool">Gmail Filters</div>
+        <div class="tool">Drive/SharePoint</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills / Capabilities -->
+  <section id="skills" class="section" style="background:#fff">
+    <div class="container">
+      <h2>Capabilities</h2>
+      <div class="grid-2">
+        <ul class="list">
+          <li>Email outreach & LinkedIn outreach</li>
+          <li>Meeting prep, live call support & follow‑ups</li>
+          <li>Travel planning & concierge‑style coordination</li>
+          <li>Light bookkeeping: invoices, receipts, summaries</li>
+          <li>Data entry & quick-turn desk research</li>
+        </ul>
+        <ul class="list">
+          <li>Content scheduling (podcasts, socials)</li>
+          <li>Doc cleanup & formatting (Slides/Docs/Word)</li>
+          <li>SOP creation & team onboarding kits</li>
+          <li>Calendar hygiene & buffer optimization</li>
+          <li>Light automation setup (rules, filters, zaps)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container grid-2">
+      <div class="card" style="padding:0;overflow:hidden">
+        <img alt="Workspace" src="https://images.unsplash.com/photo-1604881987921-cf6a6b31b1c8?q=80&w=1400&auto=format&fit=crop" style="height:360px;object-fit:cover;width:100%"/>
+      </div>
+      <div>
+        <h2>Hi, I’m Kristel — your Executive Assistant.</h2>
+        <p>I’ve supported CEOs and founders across e‑commerce and digital businesses for 8+ years. My style is calm, proactive, and detail‑driven. I blend human judgment with helpful AI tools to move faster—without ever losing the personal touch.</p>
+        <div class="grid-3" style="margin-top:14px">
+          <div class="card stat"><div class="k">Years</div><div class="v">8+</div></div>
+          <div class="card stat"><div class="k">Timezone</div><div class="v">GMT+8 (PH)</div></div>
+          <div class="card stat"><div class="k">Engagements</div><div class="v">Retainers & projects</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="section" style="background:#fff">
+    <div class="container">
+      <h2>Selected Work</h2>
+      <p class="muted" style="max-width:720px;margin:.4rem 0 1.2rem">A few representative projects. I’m happy to walk you through more examples on a call.</p>
+      <div class="grid-3">
+        <div class="card">
+          <h3>Inbox Rebuild for DTC CEO</h3>
+          <p class="muted">Cut daily inbox time from 2h → 20m using triage, templates, and rules.</p>
+          <a class="btn btn-outline" href="#contact" style="margin-top:10px">Request Details →</a>
+        </div>
+        <div class="card">
+          <h3>Calendar Strategy</h3>
+          <p class="muted">Introduced focus blocks, bi‑weekly reviews, and travel‑aware scheduling.</p>
+          <a class="btn btn-outline" href="#contact" style="margin-top:10px">Request Details →</a>
+        </div>
+        <div class="card">
+          <h3>Podcast Launch Support</h3>
+          <p class="muted">Coordinated guests, show notes, light edits, and publishing cadence.</p>
+          <a class="btn btn-outline" href="#contact" style="margin-top:10px">Request Details →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section">
+    <div class="container">
+      <h2>What clients are saying</h2>
+      <div class="grid-2" style="gap:18px;margin-top:10px">
+        <div class="card testi">
+          <p style="font-size:1.06rem;color:#0b1220;line-height:1.6">“An indispensable part of my day. My inbox is finally sane and meetings run on rails.”</p>
+          <div style="font-weight:800">Alex R.</div>
+          <div class="muted" style="font-size:.88rem">CEO, E‑commerce brand</div>
+        </div>
+        <div class="card testi">
+          <p style="font-size:1.06rem;color:#0b1220;line-height:1.6">“Calm, fast, and two steps ahead. I get summaries instead of stress.”</p>
+          <div style="font-weight:800">Jamie L.</div>
+          <div class="muted" style="font-size:.88rem">Founder, SaaS startup</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="section" style="background:#fff">
+    <div class="container">
+      <h2>Pricing</h2>
+      <p class="muted" style="margin:.4rem 0 1.2rem">Choose the weekly support that matches your pace. Hours can roll within the same month as needed.</p>
+      <div class="grid-3">
+        <div class="card">
+          <div class="price">
+            <h3>Starter</h3>
+            <div class="amt">$1,120<span style="font-size:.9rem;font-weight:700;color:var(--muted)">/mo</span></div>
+            <div class="muted">10 hours / week (40 hrs / month)</div>
+            <ul class="list" style="margin-top:.4rem">
+              <li>Inbox & calendar management</li>
+              <li>Weekly check‑in & task updates</li>
+              <li>Light ad‑hoc support</li>
+            </ul>
+            <a class="btn btn-outline" href="#contact" style="margin-top:10px">Start Starter</a>
+          </div>
+        </div>
+        <div class="card" style="position:relative;border-color:#0f172a">
+          <span class="most">Most Popular</span>
+          <div class="price">
+            <h3>Growth</h3>
+            <div class="amt">$2,240<span style="font-size:.9rem;font-weight:700;color:var(--muted)">/mo</span></div>
+            <div class="muted">20 hours / week (80 hrs / month)</div>
+            <ul class="list" style="margin-top:.4rem">
+              <li>Everything in Starter</li>
+              <li>Travel & personal concierge</li>
+              <li>Meeting briefs + follow‑ups</li>
+              <li>Priority task turnaround</li>
+            </ul>
+            <a class="btn" href="#contact" style="margin-top:10px">Go Growth</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="price">
+            <h3>Custom</h3>
+            <div class="amt">Custom</div>
+            <div class="muted">You choose tasks & hours</div>
+            <ul class="list" style="margin-top:.4rem">
+              <li>Flexible scope & cadence</li>
+              <li>SOPs & team enablement</li>
+              <li>Priority alignment & reporting</li>
+            </ul>
+            <a class="btn btn-outline" href="#contact" style="margin-top:10px">Design Your Plan</a>
+          </div>
+        </div>
+      </div>
+      <p class="price note" style="margin-top:10px">*Rates reflect premium, human‑led EA support. Quarterly commitments available.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <div class="container">
+      <h2>Let’s make space for your best work</h2>
+      <p class="muted" style="margin:.4rem 0 1.2rem">Tell me your top 3 pain points. I’ll propose a simple plan within 24 hours.</p>
+      <form class="card" onsubmit="return handleContact(event)">
+        <div class="grid-2" style="gap:12px">
+          <input class="field" placeholder="Your name" required/>
+          <input class="field" placeholder="Work email" type="email" required/>
+        </div>
+        <input class="field" placeholder="Company (optional)" style="margin:12px 0"/>
+        <textarea class="field" placeholder="What would you like to hand off first?" rows="6" required></textarea>
+        <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn" type="submit">Send inquiry →</button>
+          <a class="btn btn-outline" href="mailto:hello@pazzwork.com">Prefer email?</a>
+        </div>
+      </form>
+      <p class="muted" style="margin-top:10px">Prefer email? hello@pazzwork.com</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap">
+      <div>© <span id="yr"></span> Pazzwork — Executive Assistance for CEOs & Founders</div>
+      <div style="display:flex;gap:16px">
+        <a href="#contact">Contact</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("yr").textContent = new Date().getFullYear();
+    function handleContact(e){
+      e.preventDefault();
+      alert("Thanks! I’ll reply within 24 hours.");
+      return false;
+    }
+  </script>
+</body>
+</html>
